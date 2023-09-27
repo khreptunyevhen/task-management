@@ -3,10 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.scss" />
+    <link rel="stylesheet" href="./css/style.css" />
     <title>Task management</title>
   </head>
   <body>
+    <div class="app">
+      <div class="container">
+        <div class="boards">
+          <div class="boards-item">
+            <h2 class="title" contenteditable="true">Starter board</h2>
+            <ul class="list">
+              <li class="list-item" draggable="true">Starter list</li>
+            </ul>
+            <!-- Add a cards -->
+            <form class="card-form">
+              <textarea
+                class="card-text"
+                cols="30"
+                rows="10"
+                placeholder="Enter card title..."
+              ></textarea>
+              <div class="buttons">
+                <button id="add-content" class="add-card">Add a card</button>
+                <button class="cancel-card">Cancel</button>
+              </div>
+            </form>
+            <!--  -->
+            <button id="add-card" class="add-card">
+              <span>+ </span>
+              Add a card
+            </button>
+          </div>
+        </div>
+        <button class="add-board">
+          <span>+ </span>
+          Add another list
+        </button>
+      </div>
+    </div>
     <script src="./js/script.js"></script>
   </body>
 </html>
