@@ -36,12 +36,13 @@ function addCard() {
   addContentBtn.addEventListener("click", () => {
     const cardEl = document.createElement("li");
     cardEl.classList.add("list-item");
-    cardEl.draggable = "true";
+    cardEl.draggable = true;
     cardEl.textContent = cardValue;
 
     clearForm();
 
     list.appendChild(cardEl);
+    dragNdrop();
   });
 }
 
@@ -61,6 +62,7 @@ function addNewBoard() {
   document.querySelector(".boards").appendChild(board);
 
   changeTitle();
+  dragNdrop();
 }
 
 // Clear add a card form
@@ -78,6 +80,55 @@ function changeTitle() {
     title.addEventListener("click", (e) => (e.target.textContent = ""))
   );
 }
+
+// DragNdrop
+
+let draggableItem = null;
+
+function dragNdrop() {
+  const listItems = document.querySelectorAll(".list-item");
+  const lists = document.querySelectorAll(".list");
+
+  for (let i = 0; i < listItems.length; i++) {
+    const item = listItems[i];
+
+    item.addEventListener("dragstart", (e) => {
+      draggableItem = item;
+      setTimeout(() => {
+        item.style.display = "none";
+      }, 0);
+    });
+
+    item.addEventListener("dragend", (e) => {
+      setTimeout(() => {
+        item.style.display = "block";
+        draggableItem = null;
+      }, 0);
+    });
+
+    for (let j = 0; j < lists.length; j++) {
+      const list = lists[j];
+
+      list.addEventListener("dragover", (e) => e.preventDefault());
+
+      list.addEventListener("dragenter", function (e) {
+        e.preventDefault();
+        this.style.backgroundColor = "red";
+      });
+
+      list.addEventListener("dragleave", function (e) {
+        e.preventDefault();
+        this.style.backgroundColor = "";
+      });
+
+      list.addEventListener("drop", function (e) {
+        this.appendChild(draggableItem);
+      });
+    }
+  }
+}
+
+dragNdrop();
 
 // Events
 addBoardBtn.addEventListener("click", addNewBoard);
