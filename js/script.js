@@ -1,4 +1,5 @@
 const addCardBtn = document.querySelector("#add-card");
+const addBoardBtn = document.querySelector(".add-board");
 const cardContent = document.querySelector(".card-text");
 const cardForm = document.querySelector(".card-form");
 
@@ -45,6 +46,22 @@ function addCard() {
 }
 
 addCard();
+changeTitle();
+
+// Add a new board
+function addNewBoard() {
+  let board = document.createElement("div");
+  board.classList.add("boards-item");
+
+  board.innerHTML = `
+    <h2 class="title" contenteditable="true">Card name</h2>
+    <ul class="list"></ul>
+  `;
+
+  document.querySelector(".boards").appendChild(board);
+
+  changeTitle();
+}
 
 // Clear add a card form
 function clearForm() {
@@ -52,3 +69,15 @@ function clearForm() {
   addCardBtn.style.display = "block";
   cardContent.value = "";
 }
+
+// Change a card name
+function changeTitle() {
+  const titles = document.querySelectorAll(".title");
+
+  titles.forEach((title) =>
+    title.addEventListener("click", (e) => (e.target.textContent = ""))
+  );
+}
+
+// Events
+addBoardBtn.addEventListener("click", addNewBoard);
