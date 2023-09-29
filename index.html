@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/f963fbf1b8.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="./css/style.css" />
     <title>Task management</title>
   </head>
@@ -13,7 +17,12 @@
           <div class="boards-item">
             <h2 class="title" contenteditable="true">Starter board</h2>
             <ul class="list">
-              <li class="list-item" draggable="true">Starter list</li>
+              <li class="list-item" draggable="true">
+                <span>Starter list</span>
+                <button class="delete-btn">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </li>
             </ul>
             <!-- Add a cards -->
             <form class="card-form">

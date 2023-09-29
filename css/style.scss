@@ -63,17 +63,29 @@ body {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        min-height: 40px;
+        min-height: 38px;
         margin-bottom: 10px;
+        border-radius: 5px;
         transition: all 0.3 ease;
         overflow: hidden;
 
         &-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
           list-style: none;
           padding: 10px;
           border-radius: 5px;
           background-color: var(--card-item-bg);
           box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+          .delete-btn {
+            display: none;
+          }
+
+          &:hover .delete-btn {
+            display: block;
+          }
         }
       }
 

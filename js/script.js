@@ -36,8 +36,12 @@ function addCard() {
   addContentBtn.addEventListener("click", () => {
     const cardEl = document.createElement("li");
     cardEl.classList.add("list-item");
+    cardEl.innerHTML = `
+      <span>${cardValue}</span>
+      <button class="delete-btn">
+        <i class="fa-solid fa-trash"></i>
+      </button>`;
     cardEl.draggable = true;
-    cardEl.textContent = cardValue;
 
     clearForm();
 
@@ -91,25 +95,36 @@ function dragNdrop() {
 
   for (let i = 0; i < listItems.length; i++) {
     const item = listItems[i];
+    const deleteBtn = item.querySelector(".delete-btn");
 
-    item.addEventListener("dragstart", (e) => {
+    item.addEventListener("dragstart", function () {
       draggableItem = item;
+      this.style.color = "red";
+      // this.style.transform = "rotate(-10deg)";
+
       setTimeout(() => {
         item.style.display = "none";
       }, 0);
     });
 
-    item.addEventListener("dragend", (e) => {
+    item.addEventListener("dragend", function () {
+      this.style.color = "black";
+      // this.style.transform = "rotate(0deg)";
+
       setTimeout(() => {
-        item.style.display = "block";
+        item.style.display = "flex";
         draggableItem = null;
       }, 0);
     });
 
+    deleteBtn.addEventListener("click", () => item.remove());
+
     for (let j = 0; j < lists.length; j++) {
       const list = lists[j];
 
-      list.addEventListener("dragover", (e) => e.preventDefault());
+      list.addEventListener("dragover", function (e) {
+        e.preventDefault();
+      });
 
       list.addEventListener("dragenter", function (e) {
         e.preventDefault();
@@ -118,6 +133,7 @@ function dragNdrop() {
 
       list.addEventListener("dragleave", function (e) {
         e.preventDefault();
+        console.log("leave", this.offsetHeight);
         this.style.backgroundColor = "";
       });
 
